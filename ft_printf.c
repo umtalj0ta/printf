@@ -11,10 +11,9 @@ int	ft_formats(va_list args, char c)
 		buffer += ft_putpercent();
 	else if (c == 's')
 		buffer += ft_printstr(va_arg(args, char *));
-  else if (c == 'i' || c == 'd')
-    buffer += ft_printnbr(va_arg(args,int));
-  
-  return(buffer);
+	else if (c == 'i' || c == 'd')
+		buffer += ft_printnbr(va_arg(args, int));
+	return (buffer);
 }
 
 int	ft_printf(const char *str, ...)

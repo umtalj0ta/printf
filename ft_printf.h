@@ -8,9 +8,9 @@
 
 int		ft_printf(const char *str, ...);
 int		ft_formats(va_list args, char c);
-char	ft_printchar(int c); 
-int 	ft_putpercent(void);
+char	ft_printchar(int c);
+int		ft_putpercent(void);
 void	ft_putstr(char *s);
 int		ft_printstr(char *s);
-int   ft_printnbr(int n);
+int		ft_printnbr(int n);
 #endif
