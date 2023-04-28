@@ -1,4 +1,6 @@
 #include "ft_printf.h"
+#include "libft/libft.h"
+#include <stdio.h>
 
 char	ft_printchar(int c)
 {
@@ -69,3 +71,103 @@ int	ft_printnbr(int n)
 	free(nbr);
 	return (len);
 }
+
+int	ft_nbrlen(unsigned int n, unsigned int base)
+{
+	int	count;
+
+	count = 0;
+	while (n)
+	{
+		count++;
+		n /= base;
+	}
+	return (count);
+}
+
+char	*ft_uitoa(unsigned int n)
+{
+	char	*str;
+	int		i;
+
+	i = ft_nbrlen(n, 10);
+	str = (char *)malloc(sizeof(char) * (i + 1));
+	if ((!str))
+		return (NULL);
+	str[i--] = '\0';
+	while (n)
+	{
+		str[i--] = n % 10 + '0';
+		n /= 10;
+	}
+	return (str);
+}
+
+int	ft_printuns(int n)
+{
+	int					len;
+	unsigned long int	nb;
+	char				*nbr;
+
+	nb = (unsigned long int)n;
+	len = 0;
+	if (nb == 0)
+	{
+		ft_printchar('0');
+		return (1);
+	}
+	// printf(" valor de nb quanto esta %u\n",nb);
+	nbr = ft_uitoa(nb);
+	// printf("%s valor de nbr pos itoa", nbr);
+	len += ft_printstr(nbr);
+	return (len);
+}
+
+void	ft_getadress(unsigned long long n)
+{
+//char *hex[16]
+//hex = "0123456789abcdef"
+	if (n >= 16)
+	{
+		ft_getadress(n / 16);
+		ft_getadress(n % 16);
+	}
+  else
+	{
+		  if (n <= 9)
+			  ft_printchar(n + '0');
+		  else
+			  ft_printchar(n - 10 + 'a');
+	}
+}
+
+int	ft_adress_len(unsigned long long n)
+{
+	int	count;
+
+	count = 0;
+	while (n)
+	{
+		count++;
+		n /= 16;
+	}
+	return (count);
+}
+
+int	ft_printadress(unsigned long long n)
+{
+	int	len;
+
+	len = 0;
+	if (n == 0)
+		len += ft_printstr("(nil)");
+	else
+	{
+		ft_putstr("0x");
+		len += 2;
+		ft_getadress(n);
+    len += ft_adress_len(n);
+	}
+	return (len);
+}
+

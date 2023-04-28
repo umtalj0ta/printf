@@ -13,4 +13,6 @@ int		ft_putpercent(void);
 void	ft_putstr(char *s);
 int		ft_printstr(char *s);
 int		ft_printnbr(int n);
+int   ft_printuns(int n);
+int   ft_printadress(unsigned long long n);
 #endif

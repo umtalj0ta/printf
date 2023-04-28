@@ -13,31 +13,35 @@ int	ft_formats(va_list args, char c)
 		buffer += ft_printstr(va_arg(args, char *));
 	else if (c == 'i' || c == 'd')
 		buffer += ft_printnbr(va_arg(args, int));
-	return (buffer);
+  else if (c == 'u')
+    buffer += ft_printuns(va_arg(args,int));
+  else if (c == 'p')
+    buffer += ft_printadress(va_arg(args, unsigned long long));
+  return(buffer);              
 }
 
-int	ft_printf(const char *str, ...)
-{
-	va_list			args;
-	int				buffer;
-	unsigned int	i;
+  int	ft_printf(const char *str, ...)
+  {
+    va_list			args;
+    int				buffer;
+    unsigned int	i;
 
-	i = 0;
-	buffer = 0;
-	va_start(args, str);
-	while (str[i])
-	{
-		if (str[i] == '%')
-		{
-			i++;
-			buffer += ft_formats(args, str[i]);
-		}
-		else
-		{
-			ft_printchar(str[i]);
-			buffer++;
-		}
-		i++;
+    i = 0;
+    buffer = 0;
+    va_start(args, str);
+    while (str[i])
+    {
+      if (str[i] == '%')
+      {
+        i++;
+        buffer += ft_formats(args, str[i]);
+      }
+      else
+      {
+        ft_printchar(str[i]);
+        buffer++;
+      }
+      i++;
 	}
 	va_end(args);
 	return (buffer);
@@ -45,8 +49,8 @@ int	ft_printf(const char *str, ...)
 
 // int	main(void)
 // {
-// 	int teste = -2147483648;
-// int teste2 = -21;
-// 	ft_printf("%i\n", teste);
-//   	ft_printf("%i", teste2);
+//   unsigned int *ptr;
+
+//   printf("printf original: %p\n",&ptr);
+//   ft_printf("my printf: %p\n", &ptr);
 // }
