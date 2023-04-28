@@ -123,14 +123,14 @@ int	ft_printuns(int n)
 	return (len);
 }
 
-void	ft_getadress(unsigned long long n)
+void	ft_gethex(unsigned long long n)
 {
 //char *hex[16]
 //hex = "0123456789abcdef"
 	if (n >= 16)
 	{
-		ft_getadress(n / 16);
-		ft_getadress(n % 16);
+		ft_gethex(n / 16);
+		ft_gethex(n % 16);
 	}
   else
 	{
@@ -165,7 +165,7 @@ int	ft_printadress(unsigned long long n)
 	{
 		ft_putstr("0x");
 		len += 2;
-		ft_getadress(n);
+		ft_gethex(n);
     len += ft_adress_len(n);
 	}
 	return (len);
